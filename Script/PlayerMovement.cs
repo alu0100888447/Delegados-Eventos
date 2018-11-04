@@ -22,7 +22,12 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (rb.position.y < -1f)
         {
-            GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            FindObjectOfType<GameManager>().EndGame();
+        }
+        if (forwardForce <= 0)
+        {
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
             FindObjectOfType<GameManager>().EndGame();
         }
     }

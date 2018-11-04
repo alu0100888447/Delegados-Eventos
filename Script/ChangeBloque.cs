@@ -10,25 +10,27 @@ public class ChangeBloque : MonoBehaviour {
 
     private void Start()
     {
-        bloques = GameObject.FindGameObjectsWithTag("NegativeObstacle");
+        GameController.ChangeColor += ChangeBlockColor;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name == "Player" && contador % 2 == 0)
+        if (collision.collider.name == "Player")
         {
-            foreach(GameObject bloque in bloques)
-            {
-                bloque.GetComponent<Renderer>().material.color = new UnityEngine.Color(0, 0, 0);
-            }
+            GameController.ChangeBlocksColor();
             contador++;
-        } else if (collision.collider.name == "Player" && contador % 2 == 1)
+        } 
+    }
+
+    public void ChangeBlockColor ()
+    {
+        if (contador % 2 == 0)
         {
-            foreach (GameObject bloque in bloques)
-            {
-                bloque.GetComponent<Renderer>().material = colorMaterial;
-            }
-            contador++;
+            gameObject.GetComponent<Renderer>().material.color = new UnityEngine.Color(0, 0, 0);
+        }
+        else
+        {
+            gameObject.GetComponent<Renderer>().material = colorMaterial;
         }
     }
 }
